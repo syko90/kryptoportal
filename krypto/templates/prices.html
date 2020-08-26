@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% for key, value in krypto.DISPLAY.items %}
+
+        
+            <strong>Name</strong>: {{ key }}</br>
+            <strong>Price</strong>: {{ value.PLN.PRICE }}</br>
+            <strong>Daily high</strong>: {{ value.PLN.HIGHDAY }}</br>
+            <strong>Daiy low</strong>: {{ value.PLN.LOWDAY }}</br>
+            <strong>MKC</strong>:{{ value.PLN.MKTCAP }}</br>
+        
+      
+    {% endfor %}
+
+<br/><br/>
+
     {{ krypto }}
 {% endblock %}
