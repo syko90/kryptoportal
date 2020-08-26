@@ -4,6 +4,9 @@
     {% if notfound %}
        <h1>{{ notfound }}</h1> 
     {% else %}
+        {% if krypto.Response %}
+        <h1>Symbol <strong>{{ quote }}</strong> nie istnieje. Wpisz inny dostępny symbol kryptowaluty w naszej aplikacji</h1>
+        {% endif %}
         {% for key, value in krypto.DISPLAY.items %}
 
             
