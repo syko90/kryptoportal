@@ -1,1 +1,1 @@
-web: gunicorn kryptoportal.wsgi
+web: gunicorn kryptoportal.wsgi:application
