@@ -23,4 +23,5 @@ def prices(request):
         krypto = json.loads(krypto_request.content)
         return render(request, 'prices.html', {'quote': quote, 'krypto': krypto})
     else:
-        return render(request, 'prices.html', {})
+        notfound = "Wpisz w wyszukiwarce poprawny symbol kryptowaluty"
+        return render(request, 'prices.html', {'notfound': notfound})
