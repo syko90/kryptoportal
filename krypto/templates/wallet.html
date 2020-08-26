@@ -1,7 +1,45 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
-    {{ balance_eth }}
+   {% if  is_connected %}
+   {% for key, value in ethereum.DISPLAY.items %}
+
+
+        
+
+
+
+
+
+    <table class="table table-striped table-bordered table-dark ">
+        <thead>
+          <tr>
+            <th scope="col">Balance Ethereum</th>
+            <th scope="col">Balance w PLN</th>
+            <th scope="col">Cena gazu</th>
+            <th scope="col">Status połączenia</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <td class="align-middle"> {{ balance_eth }} ETH</td>
+            <td class="align-middle"> {{ balance_pln|floatformat:2 }} PLN </td>
+            <td class="align-middle"> {{ gas_price }} Wei</td>
+            <td class="align-middle">  <div class="alert alert-success"  role="alert" >
+                podłączony </div> </td>
+   
+
+        </tbody>
+      </table>
+
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        Nie jesteś poprawnie podłączony do Blockchain Ethereum!
+    </div>
+    {% endif %}
+
 
 {% endblock %}

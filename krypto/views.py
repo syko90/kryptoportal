@@ -4,6 +4,7 @@ import json
 from web3 import Web3
 
 
+
 def home(request):
     # aktualne kursy krypto
     
@@ -32,9 +33,13 @@ def wallet(request):
     infura_url = "https://mainnet.infura.io/v3/1b8ab038ffe14a658bf6d01b7f24ba97"
     web3 = Web3(Web3.HTTPProvider(infura_url))
     is_connected = web3.isConnected()
-    block_number = web3.eth.blockNumber  
+    gas_price = web3.eth.gasPrice # zwraca cenę gazu w Wei
+
+    eth_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=PLN")
+    ethereum = json.loads(eth_request.content)
+    print(ethereum) # just work with json! check how to do it in internet, next just devide ethereum price
 
     balance = web3.eth.getBalance("0x3cA0Cf35ca066eD617774f393Bfb3085a340296B")
     balance_eth = web3.fromWei(balance, "ether")
-
-    return render(request, 'wallet.html', {'is_connected': is_connected, 'block_nmber': block_number, 'balance_eth': balance_eth})
+    balance_pln = balance_eth*1400
+    return render(request, 'wallet.html', {'is_connected': is_connected, 'gas_price': gas_price, 'balance_eth': balance_eth, 'balance_pln': balance_pln, 'ethereum': ethereum})
