@@ -1,14 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Witaj Świecie!</h1>
 
-    <ul>
+
+<div class="container">
+    <div class="row">
         {% for x in api.Data %}
-            <li> {{x.title}} </li>
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img src="{{ x.imageurl }}" class="card-img-top" alt=" {{ x.suurce }}">
+                <div class="card-body">
+                <h5 class="card-title">{{ x.title }}</h5>
+                <p class="card-text">{{ x.body }}</p>  <!-- przyciąć do kilku znaków np.: 50 znaków -->
+                <a href=" {{ x.url }}" class="btn btn-primary">Przeczytaj artykuł....</a>
+                </div>
+            </div>
+        </div>        
         {% endfor %}
-    </ul>
+    </div>
+</div>
 
-    {{ api.Data }}
+
 
 {% endblock %}
