@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import requests
 import json
+from web3 import Web3
+
 
 def home(request):
     # aktualne kursy krypto
@@ -25,3 +27,14 @@ def prices(request):
     else:
         notfound = "Wpisz w wyszukiwarce poprawny symbol kryptowaluty"
         return render(request, 'prices.html', {'notfound': notfound})
+
+def wallet(request):
+    infura_url = "https://mainnet.infura.io/v3/1b8ab038ffe14a658bf6d01b7f24ba97"
+    web3 = Web3(Web3.HTTPProvider(infura_url))
+    is_connected = web3.isConnected()
+    block_number = web3.eth.blockNumber  
+
+    balance = web3.eth.getBalance("0x3cA0Cf35ca066eD617774f393Bfb3085a340296B")
+    balance_eth = web3.fromWei(balance, "ether")
+
+    return render(request, 'wallet.html', {'is_connected': is_connected, 'block_nmber': block_number, 'balance_eth': balance_eth})
