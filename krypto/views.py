@@ -37,9 +37,10 @@ def wallet(request):
 
     eth_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=PLN")
     ethereum = json.loads(eth_request.content)
-    print(ethereum) # just work with json! check how to do it in internet, next just devide ethereum price
+    # print(type(ethereum['RAW']['ETH']['PLN']['PRICE']))  # just check price of ETH
 
     balance = web3.eth.getBalance("0x3cA0Cf35ca066eD617774f393Bfb3085a340296B")
     balance_eth = web3.fromWei(balance, "ether")
-    balance_pln = balance_eth*1400
+    print(balance_eth*ethereum['RAW']['ETH']['PLN']['PRICE'])
+    balance_pln = balance_eth*ethereum['RAW']['ETH']['PLN']['PRICE']
     return render(request, 'wallet.html', {'is_connected': is_connected, 'gas_price': gas_price, 'balance_eth': balance_eth, 'balance_pln': balance_pln, 'ethereum': ethereum})
