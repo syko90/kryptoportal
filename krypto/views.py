@@ -5,7 +5,7 @@ import json
 def home(request):
     # aktualne kursy krypto
     
-    price_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD,EUR")
+    price_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,BAT,IOT&tsyms=PLN,EUR")
     price = json.loads(price_request.content)
 
 

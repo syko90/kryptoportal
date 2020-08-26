@@ -3,7 +3,14 @@
 {% block content %}
 
 {% for key, value in price.DISPLAY.items %}
-    {{ key }} - {{ value.USD.PRICE }} <br/>
+    <strong>Nazwa: </strong>{{ key }}<br/>
+    <strong>Aktualny kurs:</strong>{{ value.PLN.PRICE }}<br/>
+    <strong>Dzisiejsza najwysza wartość:</strong>{{ value.PLN.HIGHDAY }}<br/>
+    <strong>Dzisiejsza najnisza wartość:</strong>{{ value.PLN.LOWDAY }}<br/>
+    <strong>Marketcap:</strong> {{ value.PLN.MKTCAP }}<br/>
+    <br><br/>
+
+
 {% endfor %}
 
 <br/><br/>
