@@ -12,7 +12,7 @@ def home(request):
     price = json.loads(price_request.content)
 
 
-    # krypto waidomości
+    # krypto widomości
     api_request = requests.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     api = json.loads(api_request.content)
     return render(request, 'home.html', {'api': api, 'price': price}) 
@@ -41,6 +41,6 @@ def wallet(request):
 
     balance = web3.eth.getBalance("0x3cA0Cf35ca066eD617774f393Bfb3085a340296B")
     balance_eth = web3.fromWei(balance, "ether")
-    print(balance_eth*ethereum['RAW']['ETH']['PLN']['PRICE'])
-    balance_pln = balance_eth*ethereum['RAW']['ETH']['PLN']['PRICE']
+    #print(balance_eth*ethereum['RAW']['ETH']['PLN']['PRICE'])
+    balance_pln = float(balance_eth)*float(ethereum['RAW']['ETH']['PLN']['PRICE'])
     return render(request, 'wallet.html', {'is_connected': is_connected, 'gas_price': gas_price, 'balance_eth': balance_eth, 'balance_pln': balance_pln, 'ethereum': ethereum})
