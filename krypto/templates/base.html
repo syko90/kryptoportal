@@ -26,9 +26,9 @@
           </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0" methos="POST" action="{% url 'prices' %}">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'prices' %}">
           {% csrf_token %}
-          <input class="form-control mr-sm-2" type="search" placeholder="Szukaj krypto" aria-label="Search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Szukaj krypto" aria-label="Search" name="quote">
           <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Szukaj</button>
         </form>
       </div>
