@@ -25,9 +25,8 @@ def prices(request):
         krypto_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" + quote + "&tsyms=PLN,EUR")
         krypto = json.loads(krypto_request.content)
         return render(request, 'prices.html', {'quote': quote, 'krypto': krypto})
-    else:
-        notfound = "Wpisz w wyszukiwarce poprawny symbol kryptowaluty"
-        return render(request, 'prices.html', {'notfound': notfound})
+    else:     
+        return render(request, 'prices.html', )
 
 def wallet(request):
     infura_url = "https://mainnet.infura.io/v3/1b8ab038ffe14a658bf6d01b7f24ba97"

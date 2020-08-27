@@ -1,27 +1,31 @@
 {% extends 'base.html' %}
 
+
+
 {% block content %}
-    {% if notfound %}
-       <h1>{{ notfound }}</h1> 
-       <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'prices' %}">
-        {% csrf_token %}
-        <input class="form-control mr-sm-2" type="search" placeholder="Szukaj krypto" aria-label="Search" name="quote">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Szukaj</button>
-    {% else %}
+<h3> Wpisz wybrany symbol kryptowaluty: BTC, ETH, BAT</h3>
+<div class="alert alert-primary" role="alert">
+    <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'prices' %}">
+    {% csrf_token %}
+    <input class="form-control mr-sm-2" type="search" placeholder="Szukaj krypto" aria-label="Search" name="quote">
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Szukaj</button>
+</form>
+</div>
+ 
+ 
         {% if krypto.Response %}
-        <h1>Symbol <strong>{{ quote }}</strong> nie istnieje. Wpisz inny dostępny symbol kryptowaluty w naszej aplikacji</h1>
+        <h3>Symbol <strong>{{ quote }}</strong> nie istnieje. Wpisz inny dostępny symbol kryptowaluty w naszej aplikacji</h3>
         {% endif %}
         {% for key, value in krypto.DISPLAY.items %}
 
             
-                <strong>Name</strong>: {{ key }}</br>
-                <strong>Price</strong>: {{ value.PLN.PRICE }}</br>
+                <strong>Krytptowaluta</strong>: {{ key }}</br>
+                <strong>Cena</strong>: {{ value.PLN.PRICE }}</br>
                 <strong>Daily high</strong>: {{ value.PLN.HIGHDAY }}</br>
                 <strong>Daiy low</strong>: {{ value.PLN.LOWDAY }}</br>
                 <strong>MKC</strong>:{{ value.PLN.MKTCAP }}</br>
             
         
         {% endfor %}
-    
-    {% endif %}
+
 {% endblock %}
