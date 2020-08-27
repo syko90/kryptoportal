@@ -3,6 +3,10 @@
 {% block content %}
     {% if notfound %}
        <h1>{{ notfound }}</h1> 
+       <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'prices' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Szukaj krypto" aria-label="Search" name="quote">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Szukaj</button>
     {% else %}
         {% if krypto.Response %}
         <h1>Symbol <strong>{{ quote }}</strong> nie istnieje. Wpisz inny dostępny symbol kryptowaluty w naszej aplikacji</h1>
@@ -18,5 +22,6 @@
             
         
         {% endfor %}
+    
     {% endif %}
 {% endblock %}
