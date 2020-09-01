@@ -11,11 +11,25 @@ def home(request):
     price_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,BAT,IOT&tsyms=PLN,EUR")
     price = json.loads(price_request.content)
 
+    # aktualne wydarzenia
+    url = "https://developers.coinmarketcal.com/v1/events"
+    querystring = {"max":"1", "translations": "pl"}
+    payload = ""
+    headers = {
+    'x-api-key': "WunvIC33Xd7vXPOhnsQAW5Whpscqw2oB8bgMypCk",
+    'Accept-Encoding': "deflate, gzip",
+    'Accept': "application/json"
+}
+
+    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+    event_cal = json.loads(response.content)
+    # print(response.text) 
+
 
     # krypto widomości
     api_request = requests.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     api = json.loads(api_request.content)
-    return render(request, 'home.html', {'api': api, 'price': price}) 
+    return render(request, 'home.html', {'api': api, 'price': price, 'event_cal': event_cal}) 
 
 
 def prices(request):
