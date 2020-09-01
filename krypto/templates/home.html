@@ -11,7 +11,13 @@
     <iframe width="560" height="315" src="https://www.youtube.com/embed/EYjpLoQpd70" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 <br><br/>
-<h1> {{ event_cal.source }}</h1>
+
+{% for x in event_cal.body %}
+
+<img src="{{ x.proof }}" class="rounded mx-auto d-block img-fluid"  alt="Responsive image" >
+<h1> {{ x.proof }}</h1>
+
+{% endfor %}
 
 <div class="table-responsive">
 <table class="table table-striped table-bordered table-hover">

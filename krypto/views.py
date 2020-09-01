@@ -23,7 +23,7 @@ def home(request):
 
     response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
     event_cal = json.loads(response.content)
-    # print(response.text) 
+    
 
 
     # krypto widomości
