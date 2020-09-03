@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Wydarzenie na krypto!</h1>
+      <p class="lead">Przygotuj się do najwazniejszych wydarzeń w świecie krypto</p>
+    </div>
+  </div>
+
+
+<div class="container">
+    <div class="row">
+        
+        {% for key in event_cal.body  %}
+
+        <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                
+                <h5 style="text-align: center" > <strong> {{ key.title.en }} </strong> </h5>
+                <a href=" {{ key.source }}" target="_blank">
+                <img class="img-fluid" src="{{ key.proof }}" class="card-img-top" alt="Card image cap"> 
+                </a>
+
+
+                <div class="alert alert-primary mb-0 pb-0" role="alert" style="text-align: center">
+                    <strong>Data: {{ key.date_event|slice:10 }} </strong> 
+                </div>
+
+                
+                  <div class="alert alert-success mb-0 pb-0" role="alert" style="text-align: center">
+                    {% for x in key.coins %}
+                    <p class="card-text">Kryptowaluta: {{ x.fullname }}</p> 
+                {% endfor %}
+                  </div>
+                
+
+                <div class="card-body" style="text-align: center">
+
+                <a href=" {{ key.source }}" class="btn btn-primary">Przejdz do wydarzenia</a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+        </div>       
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

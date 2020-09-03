@@ -11,25 +11,11 @@ def home(request):
     price_request = requests.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,BAT,IOT&tsyms=PLN,EUR")
     price = json.loads(price_request.content)
 
-    # aktualne wydarzenia
-    url = "https://developers.coinmarketcal.com/v1/events"
-    querystring = {"max":"1", "translations": "pl"}
-    payload = ""
-    headers = {
-    'x-api-key': "WunvIC33Xd7vXPOhnsQAW5Whpscqw2oB8bgMypCk",
-    'Accept-Encoding': "deflate, gzip",
-    'Accept': "application/json"
-}
-
-    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
-    event_cal = json.loads(response.content)
-    
-
 
     # krypto widomości
     api_request = requests.get("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     api = json.loads(api_request.content)
-    return render(request, 'home.html', {'api': api, 'price': price, 'event_cal': event_cal}) 
+    return render(request, 'home.html', {'api': api, 'price': price }) 
 
 
 def prices(request):
@@ -57,3 +43,22 @@ def wallet(request):
     #print(balance_eth*ethereum['RAW']['ETH']['PLN']['PRICE'])
     balance_pln = float(balance_eth)*float(ethereum['RAW']['ETH']['PLN']['PRICE'])
     return render(request, 'wallet.html', {'is_connected': is_connected, 'gas_price': gas_price, 'balance_eth': balance_eth, 'balance_pln': balance_pln, 'ethereum': ethereum})
+
+def events(request):
+    # aktualne wydarzenia
+    url = "https://developers.coinmarketcal.com/v1/events"
+    querystring = {"max":"10", "translations": "pl", "sortBy": "significant_events" }
+    payload = ""
+    headers = {
+    'x-api-key': "WunvIC33Xd7vXPOhnsQAW5Whpscqw2oB8bgMypCk",
+    'Accept-Encoding': "deflate, gzip",
+    'Accept': "application/json"
+    }
+
+    response = requests.request("GET", url, data=payload, headers=headers, params=querystring)
+    event_cal = json.loads(response.content)
+
+
+
+    return render(request, 'events.html', { 'event_cal': event_cal}  )
+    
